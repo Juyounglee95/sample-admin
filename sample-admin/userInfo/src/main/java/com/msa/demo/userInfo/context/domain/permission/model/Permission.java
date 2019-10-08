@@ -1,5 +1,8 @@
 package com.msa.demo.userInfo.context.domain.permission.model;
 
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,7 +20,8 @@ public class Permission {
 	private Long id;
 	private Long menuId;
 	private Long boardId;
-	private Long userGroupId;
+	@ElementCollection
+	private List<Long> userGroupIdList;
 	
 	@Enumerated(EnumType.STRING)
 	private PermissionTargetType permissionTargetType;

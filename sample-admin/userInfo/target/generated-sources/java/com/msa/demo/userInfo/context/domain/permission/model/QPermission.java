@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -29,7 +30,7 @@ public class QPermission extends EntityPathBase<Permission> {
 
     public final EnumPath<PermissionType> permissionType = createEnum("permissionType", PermissionType.class);
 
-    public final NumberPath<Long> userGroupId = createNumber("userGroupId", Long.class);
+    public final ListPath<Long, NumberPath<Long>> userGroupIdList = this.<Long, NumberPath<Long>>createList("userGroupIdList", Long.class, NumberPath.class, PathInits.DIRECT2);
 
     public QPermission(String variable) {
         super(Permission.class, forVariable(variable));

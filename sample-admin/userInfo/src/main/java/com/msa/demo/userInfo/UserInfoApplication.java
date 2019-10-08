@@ -1,5 +1,7 @@
 package com.msa.demo.userInfo;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +95,10 @@ public class UserInfoApplication {
 	private void createPermission(PermissionRepository permissionRepository) {
 		Permission per = new Permission(PermissionType.ADMIN, PermissionTargetType.MENU);
 		per.setMenuId((long)1);
-		per.setUserGroupId((long)1);
+		List<Long> groupList = new ArrayList<>();
+		groupList.add(1L);
+		groupList.add(2L);
+		per.setUserGroupIdList(groupList);
 		permissionRepository.save(per);
 		Permission per2 = new Permission(PermissionType.VIEW, PermissionTargetType.MENU);
 		Permission per3 = new Permission(PermissionType.EDIT, PermissionTargetType.MENU);

@@ -123,24 +123,13 @@ public class UserInfoController {
 			@RequestParam("groupId") String groupId,
 			@RequestParam("isChecked")@Nullable List<String> perList) {
 		Long group = Long.parseLong(groupId);
+		
 		if(perList != null){
-			for(String perStr : perList) {
-				Long perId = Long.parseLong(perStr.substring(3));
-				Permission per = permissionRepository.findById(perId).get();
-				if(!per.getUserGroupIdList().contains(group)) {
-					per.getUserGroupIdList().add(group);
-					permissionRepository.save(per);
-				}
-			}
+
+			userInfoService.addPermission(group, perList);
 	    }else {
-	    	List<Permission> permissions = permissionRepository.findAll();
-	    	for(Permission per: permissions) {
-	    		if(per.getUserGroupIdList().contains(group)) {
-	    			int idx =per.getUserGroupIdList().indexOf(group);
-	    			per.getUserGroupIdList().remove(idx);
-	    			permissionRepository.save(per);
-	    		}
-	    	}
+
+	    	userInfoService.deletePermission(group);
 	    }
 	    return "redirect:/permission";
 	}

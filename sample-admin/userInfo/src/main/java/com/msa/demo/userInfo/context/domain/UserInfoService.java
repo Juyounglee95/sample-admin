@@ -14,5 +14,7 @@ public interface UserInfoService {
 	public Page<Post> findPostList(Pageable pageable);
 	public Page<UserGroup> findUserGroupList(Pageable pageable);
 
-	
+	public void addPermission(Long groupId,List<String> perList);
+
+	public void deletePermission(Long groupId);
 }

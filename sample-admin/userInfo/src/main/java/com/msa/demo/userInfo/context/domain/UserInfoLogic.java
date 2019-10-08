@@ -16,6 +16,8 @@ import com.msa.demo.userInfo.context.domain.board.repository.PostRepository;
 import com.msa.demo.userInfo.context.domain.company.model.Company;
 import com.msa.demo.userInfo.context.domain.company.model.CompanyType;
 import com.msa.demo.userInfo.context.domain.company.repository.CompanyRepository;
+import com.msa.demo.userInfo.context.domain.permission.model.Permission;
+import com.msa.demo.userInfo.context.domain.permission.repository.PermissionRepository;
 import com.msa.demo.userInfo.context.domain.user.model.User;
 import com.msa.demo.userInfo.context.domain.user.repository.UserRepository;
 import com.msa.demo.userInfo.context.domain.usergroup.model.UserGroup;
@@ -33,6 +35,8 @@ public class UserInfoLogic implements UserInfoService{
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	@Autowired
+	private PermissionRepository perRepository;
 	@Override
 	public Page<Post> findPostList(Pageable pageable) {
 		pageable = PageRequest.of(pageable.getPageNumber()<=0?0:pageable.getPageNumber()-1,
@@ -44,6 +48,29 @@ public class UserInfoLogic implements UserInfoService{
 		pageable = PageRequest.of(pageable.getPageNumber()<=0?0:pageable.getPageNumber()-1,
 				pageable.getPageSize());
 		return userGroupRepository.findAll(pageable);
+	}
+	public void addPermission(Long groupId, List<String> perList) {
+		for(String perStr : perList) {
+			Long perId = Long.parseLong(perStr.substring(3));
+			Permission per = perRepository.findById(perId).get();
+			if(!per.getUserGroupIdList().contains(groupId)) {
+				per.getUserGroupIdList().add(groupId);
+				perRepository.save(per);
+			}
+		}
+		
+	}
+	public void deletePermission(Long groupId) {
+		// TODO Auto-generated method stub
+    	List<Permission> permissions = perRepository.findAll();
+    	for(Permission per: permissions) {
+    		if(per.getUserGroupIdList().contains(groupId)) {
+    			int idx =per.getUserGroupIdList().indexOf(groupId);
+    			per.getUserGroupIdList().remove(idx);
+    			perRepository.save(per);
+    		}
+    	}
+
 	}
 	
 	

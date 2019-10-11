@@ -61,8 +61,7 @@ public class UserInfoLogic implements UserInfoService{
 		
 	}
 	public void deletePermission(Long groupId) {
-		// TODO Auto-generated method stub
-    	List<Permission> permissions = perRepository.findAll();
+		List<Permission> permissions = perRepository.findAll();
     	for(Permission per: permissions) {
     		if(per.getUserGroupIdList().contains(groupId)) {
     			int idx =per.getUserGroupIdList().indexOf(groupId);

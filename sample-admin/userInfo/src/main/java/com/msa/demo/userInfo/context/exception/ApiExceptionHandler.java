@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
+	//private String INCORRECT_REQUEST = "INCORRECT_REQUEST";
+	
 	@ExceptionHandler(DemoNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ResponseEntity<ApiErrorDetail> handleDemoNotFoundException(DemoNotFoundException dnfe){
@@ -18,6 +20,16 @@ public class ApiExceptionHandler {
 		errorDetail.setTimeStamp(LocalDateTime.now());
 		errorDetail.setCode(1002);
 		errorDetail.setMessage(dnfe.getMessage());
+		return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	@ExceptionHandler(RecordNotFoundException.class)
+	public ResponseEntity<ApiErrorDetail> handleRecordNotFoundException(RecordNotFoundException rnfe){
+		ApiErrorDetail errorDetail = new ApiErrorDetail();
+		errorDetail.setTimeStamp(LocalDateTime.now());
+		errorDetail.setCode(1234); //set error code
+		errorDetail.setMessage(rnfe.getLocalizedMessage());
 		return new ResponseEntity<>(errorDetail, HttpStatus.NOT_FOUND);
 	}
 }

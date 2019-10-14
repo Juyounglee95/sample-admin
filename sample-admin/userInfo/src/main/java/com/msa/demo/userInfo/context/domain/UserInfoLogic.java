@@ -22,6 +22,7 @@ import com.msa.demo.userInfo.context.domain.user.model.User;
 import com.msa.demo.userInfo.context.domain.user.repository.UserRepository;
 import com.msa.demo.userInfo.context.domain.usergroup.model.UserGroup;
 import com.msa.demo.userInfo.context.domain.usergroup.repository.UserGroupRepository;
+import com.msa.demo.userInfo.context.exception.RecordNotFoundException;
 
 @Service
 public class UserInfoLogic implements UserInfoService{

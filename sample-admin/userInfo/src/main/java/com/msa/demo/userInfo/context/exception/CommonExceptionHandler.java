@@ -49,15 +49,15 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler{
 	        message.setMessage(userMessage);
 	        return new ResponseEntity<>(message, status); // return response to users
 	    }
-	@ExceptionHandler(Exception.class) 
-	public ModelAndView handleError(HttpServletRequest req, Exception exception, HttpStatus status) 
+	@ExceptionHandler({Exception.class, RecordNotFoundException.class}) 
+	public ModelAndView handleError(HttpServletRequest req, Exception exception) 
 	{ 	
 		logger.error("Request: " + req.getRequestURL() + " raised " + exception); 
 		ModelAndView mav = new ModelAndView(); 
 		mav.addObject("exception", exception); 
 		mav.addObject("url", req.getRequestURL());
-		mav.addObject("status", status);
-		mav.setViewName("error"); 
+	
+		mav.setViewName("/error/4xx"); 
 			return mav; 
 	}
 

@@ -21,6 +21,7 @@ public class DemoController {
 	
 	@Autowired
 	DemoRepository demoRepository;
+	
 	@RequestMapping(value="/regist", method= RequestMethod.POST)
 	public ResponseEntity<?> registDemo(@Validated @RequestBody Demo demo){
 		System.out.println("controller demo entity check: " +demo.toString());
@@ -28,12 +29,12 @@ public class DemoController {
 	}
 	
 	@RequestMapping("/{id}")
-	public ResponseEntity<?> findDemo(@PathVariable("id") Long id){
+	public Demo findDemo(@PathVariable("id") Long id){
 		Demo demo = demoRepository.findById(id).orElse(null);
 		if(demo==null) {
 			throw new DemoNotFoundException("Demo not found");
 			
 		}
-		return new ResponseEntity(demo, HttpStatus.OK);
+		return demo;
 	}
 }

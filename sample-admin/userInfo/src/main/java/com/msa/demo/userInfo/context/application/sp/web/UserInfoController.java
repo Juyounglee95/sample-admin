@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.msa.demo.userInfo.context.domain.UserInfoService;
+import com.msa.demo.userInfo.context.domain.board.model.Board;
 import com.msa.demo.userInfo.context.domain.board.model.Post;
 import com.msa.demo.userInfo.context.domain.board.repository.PostRepository;
 import com.msa.demo.userInfo.context.domain.company.model.CompanyType;
@@ -28,8 +30,10 @@ import com.msa.demo.userInfo.context.domain.menu.repository.SubMenuRepository;
 import com.msa.demo.userInfo.context.domain.menu.repository.TopMenuRepository;
 import com.msa.demo.userInfo.context.domain.permission.model.Permission;
 import com.msa.demo.userInfo.context.domain.permission.repository.PermissionRepository;
+import com.msa.demo.userInfo.context.domain.user.model.User;
 import com.msa.demo.userInfo.context.domain.user.repository.UserRepository;
 import com.msa.demo.userInfo.context.domain.usergroup.repository.UserGroupRepository;
+import com.msa.demo.userInfo.context.exception.RecordNotFoundException;
 @Controller
 public class UserInfoController {
 	
@@ -132,6 +136,16 @@ public class UserInfoController {
 	    	userInfoService.deletePermission(group);
 	    }
 	    return "redirect:/permission";
+	}
+	
+	@GetMapping("/users")
+	public User getUser(@RequestParam("id")Long id) {
+		User user = userRepository.findById(id).orElse(null);
+		if(user==null) {
+			throw new RecordNotFoundException("user not found");
+		}
+		return user;
+		
 	}
 	
 }

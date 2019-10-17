@@ -25,7 +25,7 @@ public class ApiExceptionHandler {
 	}
 	
 	
-	@ExceptionHandler(RecordNotFoundException.class)
+	@ExceptionHandler({RecordNotFoundException.class,RuntimeException.class})
 	public ResponseEntity<ApiErrorDetail> handleRecordNotFoundException(RecordNotFoundException rnfe){
 		ApiErrorDetail errorDetail = new ApiErrorDetail(HttpStatus.NOT_FOUND);
 	

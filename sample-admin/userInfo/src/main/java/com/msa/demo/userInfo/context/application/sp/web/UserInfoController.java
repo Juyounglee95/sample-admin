@@ -138,14 +138,14 @@ public class UserInfoController {
 	    return "redirect:/permission";
 	}
 	
-	@GetMapping("/users")
-	public User getUser(@RequestParam("id")Long id) {
-		User user = userRepository.findById(id).orElse(null);
-		if(user==null) {
-			throw new RecordNotFoundException("user not found");
-		}
-		return user;
-		
-	}
+//	@GetMapping("/users")
+//	public User getUser(@RequestParam("id")Long id) {
+//		User user = userRepository.findById(id).orElse(null);
+//		if(user==null) {
+//			throw new RecordNotFoundException("user not found");
+//		}
+//		return user;
+//		
+//	}
 	
 }

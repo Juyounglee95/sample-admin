@@ -29,12 +29,9 @@ public class DemoController {
 	}
 	
 	@RequestMapping("/{id}")
-	public Demo findDemo(@PathVariable("id") Long id){
-		Demo demo = demoRepository.findById(id).orElse(null);
-		if(demo==null) {
-			throw new DemoNotFoundException("Demo not found");
-			
-		}
-		return demo;
+	public ResponseEntity<Demo> findDemo(@PathVariable("id") Long id){
+		Demo demo = demoRepository.findById(id).orElseThrow(()->new DemoNotFoundException("Demo not found"));
+
+		return new ResponseEntity<>(demo, HttpStatus.OK);
 	}
 }

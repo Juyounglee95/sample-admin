@@ -63,6 +63,9 @@ public class UserInfoApplication {
 	}
 	
 	private void insertBoard(BoardRepository boardRepository) {
+		
+		//boardRepository.findById(999L).orElseThrow();
+		
 		Board board1 = new Board("SKN 자유게시판", (long)1, true);
 		Board board2 = new Board("SKN Q&A", (long)1, false);
 		Board board3 = new Board("SKN 공지사항", (long)1, true);

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
-Built-By: 10190
-Build-Jdk: 12.0.2
 Implementation-Title: userInfo
 Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: leeju
 Implementation-Vendor-Id: com.msa.demo
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
- -starter-parent/sample-admin/userInfo
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/sample-admin/userInfo
 Created-By: Maven Integration for Eclipse
 

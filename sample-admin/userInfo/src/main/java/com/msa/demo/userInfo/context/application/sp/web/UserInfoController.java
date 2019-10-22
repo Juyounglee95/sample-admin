@@ -70,12 +70,17 @@ public class UserInfoController {
 //		
 //	}
 	@GetMapping("/post")
-	public String post(@PageableDefault Pageable pageable, Model model) {
-		
-		model.addAttribute("postList", userInfoService.findPostList(pageable));
-		
-		return "/post/list";
-	}
+    public String board(@RequestParam(value = "id", defaultValue = "0") Long id, Model model) {
+        model.addAttribute("post", postRepository.findById(id).orElse(new Post()));
+        return "/post/form";
+    }
+//	@GetMapping("/post")
+//	public String post(@PageableDefault Pageable pageable, Model model) {
+//		
+//		model.addAttribute("postList", userInfoService.findPostList(pageable));
+//		
+//		return "/post/list";
+//	}
 	
 	@GetMapping("/post/list")
 	public String getPostPage(@PageableDefault Pageable pageable, Model model) {
@@ -138,14 +143,6 @@ public class UserInfoController {
 	    return "redirect:/permission";
 	}
 	
-//	@GetMapping("/users")
-//	public User getUser(@RequestParam("id")Long id) {
-//		User user = userRepository.findById(id).orElse(null);
-//		if(user==null) {
-//			throw new RecordNotFoundException("user not found");
-//		}
-//		return user;
-//		
-//	}
+
 	
 }

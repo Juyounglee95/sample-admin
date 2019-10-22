@@ -54,7 +54,7 @@
                         <td th:text="${post.id}"></td>
                         <td th:text="${post.postType}"></td>
                         
-                        <td><a th:href="'/posts?id='+${post.id}" th:text="${post.title}"></a></td>
+                        <td><a th:href="'/post?id='+${post.id}" th:text="${post.title}"></a></td>
                        	<td><a th:href="'/users?id='+${post.writerId}" th:text="${post.writerId}"></a></td>
                        
                     </tr>
